@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>norder</title>
+        <link rel="icon" href="https://github.com/norder.png">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <header class="hero">
+                <img src="https://github.com/norder.png" alt="norder" class="avatar">
+                <div class="hero-text">
+                    <h1>norder</h1>
+                    <p class="bio">
+                    情報系 / データサイエンス専攻の大学生。2019年に Java からプログラミングを始めました。<br>
+                    個人開発や技術検証、学びの備忘録などをまとめています。
+                    </p>
+                    <nav class="social-links">
+                        <a href="https://github.com/norder" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">Qiita</a>
+                    </nav>
+                </div>
+            </header>
+
+            <main>
+                <section>
+                    <h2>About</h2>
+                    <ul class="info-list">
+                        <li><span class="label">Interest</span>技術 / 数学 / 心理学 / ミステリ小説 / 疎結合な設計</li>
+                        <li><span class="label">Env</span>WezTerm / Neovim / Yazi / Startui</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Tech Stack</h2>
+                    <div class="stack-group">
+                        <span class="stack-title">Main</span>
+                        <div class="tags">
+                            <span class="tag accent">Rust</span>
+                            <span class="tag accent">Python</span>
+                            <span class="tag accent">Java</span>
+                        </div>
+                    </div>
+                    <div class="stack-group">
+                        <span class="stack-title">Other</span>
+                        <div class="tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">HTML / CSS</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">R</span>
+                            <span class="tag">C</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Works</h2>
+                    <div class="grid">
+                        <a href="https://github.com/norder/dotfiles" target="_blank" rel="noopener noreferrer" class="card">
+                            <div class="card-header">
+                                <h3>dotfiles</h3>
+                                <span class="lang">Lua / Shell</span>
+                            </div>
+                            <p>WezTerm・Neovim・Yazi などの開発環境設定ファイル。</p>
+                        </a>
+                        <!-- 新しい制作物は上の <a class="card"> ブロックをコピーして追加 -->
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Latest Articles</h2>
+                    <div id="articles" class="article-list">
+                        <p class="muted">Loading articles from Qiita...</p>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                <p>&copy; 2026 norder</p>
+            </footer>
+        </div>
+
+        <script>
+            (async () => {
+                const container = document.getElementById('articles');
+                try {
+                    const res = await fetch('https://qiita.com/api/v2/users/norder/items?page=1&per_page=5');
+                    if (!res.ok) throw new Error();
+                    const items = await res.json();
+                    if (!items.length) {
+                        container.innerHTML = '<p class="muted">まだ記事がありません。</p>';
+                        return;
+                    }
+                    container.innerHTML = items.map(item => {
+                        const date = item.created_at.slice(0, 10);
+                        return `
+                            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="article-item">
+                            <span class="article-date">${date}</span>
+                            <span class="article-title">${item.title}</span>
+                            </a>
+                            `;
+                    }).join('');
+                } catch {
+                    container.innerHTML = '<a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">Qiita で記事一覧を見る &rarr;</a>';
+                }
+            })();
+        </script>
+    </body>
+</html>
