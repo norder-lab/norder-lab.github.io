@@ -290,8 +290,9 @@ h2 {
 .work-title {
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--text-bright);
+    color: var(--accent-blue);
     word-break: break-word;
+    text-decoration: underline;
 }
 
 .work-title:hover {
