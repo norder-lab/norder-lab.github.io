@@ -142,7 +142,7 @@ section {
 h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--accent-cyan);
+    color: var(--accent-blue);
     letter-spacing: 0.04em;
     margin-bottom: 1.25rem;
     border-bottom: 1px solid var(--border-color);
@@ -165,7 +165,7 @@ h2 {
 
 .panel h3 {
     font-size: 1.2rem;
-    color: var(--text-bright);
+    color: var(--accent-cyan);
     margin-bottom: 0.65rem;
 }
 
