@@ -6,16 +6,23 @@
     </head>
     <body>
         <header>
-            <p>norder's portfolio</p>
-            <button>dark</button>
+            <p class="site-title">norder's portfolio</p>
+            <button type="button" class="theme-btn" id="theme-toggle">dark</button>
         </header>
-        <main>
-            <div class="side-panel">
-                <div class="side-card" id="name-card">
-                    <img src="" alt=""/>
+
+        <div class="central-panel">
+
+            <!-- 左サイドパネル -->
+            <aside class="side-panel">
+
+                <!-- 名前カード -->
+                <div class="side-card name-card">
+                    <img src="" alt="norder's icon"/>
                     <p>norder</p>
                 </div>
-                <div class="side-card" id="link-card">
+
+                <!-- Qiita / GitHub カード -->
+                <div class="side-card links-card">
                     <h3>links</h3>
                     <h3></h3>
                     <div>
@@ -23,31 +30,46 @@
                     <div>
                     </div>
                 </div>
-                <div class="side-card" id="directory-structure-card">
-                    <h3>directory structure</h3>
-                    <a>&frasl;home ~</a>
-                    <a>profile</a>
-                    <a>products</a>
-                    <a>articles</a>
-                </div>
-            </div>
-            <div class="main-panel">
+
+                <!-- ディレクトリツリーカード -->
+                <nav class="side-card dir-tree-card">
+                    <h3>directory tree</h3>
+                    <ul>
+                        <li><a>&frasl;home ~</a></li>
+                        <li><a>profile</a></li>
+                        <li><a>products</a></li>
+                        <li><a>articles</a></li>
+                    </ul>
+                </nav>
+
+            </aside>
+
+            <main class="main-panel">
                 <!-- NOTE: ここにprofileなどをWeb Componentとして挿入 -->
-            </div>
-            <div class="side-panel">
-                <div class="side-card" id="keybind-card">
+            </main>
+
+            <!-- 右サイドパネル -->
+            <aside class="side-panel">
+
+                <!-- キーバインドカード -->
+                <div class="side-card keybinds-card">
                     <h3>keybind</h3>
                     <div class="keybind"></div>
                     <div class="keybind"></div>
                     <div class="keybind"></div>
                 </div>
-                <div class="side-card" id="palette-card">
+
+                <!-- パレットカード -->
+                <div class="side-card palette-card">
                     <h3>nord palette</h3>
                     <div class="palette-grid">
                     </div>
                 </div>
-            </div>
-        </main>
+
+            </aside>
+
+        </div>
+
         <footer>
             <hr>
             <p>© 2026- norder</p>
