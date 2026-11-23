@@ -273,6 +273,38 @@ section > h2 svg {
     font-size: var(--text-sm);
 }
 
+.lang-select {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: underline;
+    font-size: var(text-xs);
+    color: var(--accent-primary);
+}
+
+.lang-select span {
+    color: var(--accent-primary);
+}
+
+.lang-select .external-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--accent-primary);
+}
+
+.lang-select:hover {
+    color: var(--accent-secondary);
+}
+
+.lang-select:hover span {
+    color: var(--accent-secondary);
+}
+
+.lang-select:hover .external-icon {
+    color: var(--accent-secondary);
+}
+
+
 /* --------------------------------------------------------------------------
    Profile: Meta Data（.meta-block / .meta-row / .tag）
    -------------------------------------------------------------------------- */
