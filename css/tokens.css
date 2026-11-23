@@ -37,7 +37,7 @@
     /* background color */
     --bg-base: var(--white);
     --bg-surface: var(--nord6); /* ヘッダ・side-card・ステータスバーの面背景 */
-    --bg-hover: var(--nord5); /* リストのホバー時や現在地ツリーのハイライト背景 */
+    --bg-hover: var(--nord6); /* リストのホバー時や現在地ツリーのハイライト背景 */
 
     /* text color */
     --text-main: var(--nord0); /* 見出しや本文のメイン文字 */
@@ -45,11 +45,13 @@
     --text-subtle: var(--nord2); /* 検索欄のプレースホルダーや控えめな注釈 */
 
     /* border */
-    --border-subtle: var(--nord5); /* side-card の外枠や、線区切りリストの横線 */
-    --border-focus: var(--nord8); /* 検索バー入力中やアクティブ要素の枠線 */
+    --border-subtle: var(--nord4); /* side-card の外枠や、線区切りリストの横線 */
+    --border-focus: var(--nord9); /* 検索バー入力中やアクティブ要素の枠線 */
+
+    /* border */
+    --table-line: var(--nord4);
 
     /* accent / status color */
-
     --accent-primary: var(--nord10); /* リンク・現在地・メイン強調色(Nord Frost系) */
     --accent-secondary: var(--nord9); /* 言語ラベルやタグバッジのサブ強調色 */
     --status-ok: var(--nord14);
@@ -65,11 +67,16 @@
     --text-base: 1rem;
     --text-lg: 1.125rem;
     --text-xl: 1.5rem;
+    --text-xxl: 1.8rem;
+    --text-xxxl: 2.3rem;
 
     --radius-sm: 4px;
     --radius-md: 6px;
+    --radius-lg: 8px;
+
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
     --space-lg: 24px;
+    --space-xl: 48px;
 }
