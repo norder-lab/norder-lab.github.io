@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="./css/transitions.css">
         <link rel="stylesheet" href="./css/main.css">
 
+        <!-- Lucide アイコン -->
+        <script src="https://unpkg.com/lucide@latest" defer></script>
+
         <!-- Alpine.js プラグイン -->
         <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
@@ -35,17 +38,17 @@
                 <div class="page-link-card">
                     <a href="./profile.html">
                         <div class="page-link-head">
-                            <h3>profile</h3>
-                            <p>→</p>
+                            <h3><i data-lucide="user" aria-hidden="true"></i><span>profile</span></h3>
+                            <i data-lucide="arrow-right" class="link-arrow" aria-hidden="true"></i>
                         </div>
                         <p class="page-description">これはprofileです</p>
                     </a>
                 </div>
                 <div class="page-link-card">
-                    <a href=",/products.html">
+                    <a href="./products.html">
                         <div class="page-link-head">
-                            <h3>products</h3>
-                            <p>→</p>
+                            <h3><i data-lucide="folder-code" aria-hidden="true"></i><span>products</span></h3>
+                            <i data-lucide="arrow-right" class="link-arrow" aria-hidden="true"></i>
                         </div>
                         <p class="page-description">これはproductsです</p>
                     </a>
@@ -53,8 +56,8 @@
                 <div class="page-link-card">
                     <a href="./articles.html">
                         <div class="page-link-head">
-                            <h3>articles</h3>
-                            <p>→</p>
+                            <h3><i data-lucide="file-text" aria-hidden="true"></i><span>articles</span></h3>
+                            <i data-lucide="arrow-right" class="link-arrow" aria-hidden="true"></i>
                         </div>
                         <p class="page-description">これはarticlesです</p>
                     </a>
@@ -62,7 +65,7 @@
             </section>
 
             <section>
-                <h2>recent products</h2>
+                <h2><i data-lucide="folder-code" aria-hidden="true"></i><span>recent products</span></h2>
                 <div class="recent-link-card">
                     <a href="">
                         <h3>products</h3>
@@ -78,7 +81,7 @@
             </section>
 
             <section>
-                <h2>recent articles</h2>
+                <h2><i data-lucide="file-text" aria-hidden="true"></i><span>recent articles</span></h2>
                 <div class="recent-link-card">
                     <a href="">
                         <h3>articles</h3>

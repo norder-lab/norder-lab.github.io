@@ -9,9 +9,18 @@
    ヘッダ・ステータスバー
    -------------------------------------------------------------------------- */
 .site-title {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: var(--text-xl);
+    color: var(--text-main);
+}
+
+.site-title svg {
+    flex-shrink: 0;
+    color: var(--text-main);
 }
 
 .status-bar {
@@ -40,6 +49,18 @@
     font-family: var(--font-mono);
     font-size: var(--text-xm);
     color: var(--text-muted);
+}
+
+.card-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.card-heading svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -90,6 +111,24 @@
     color: var(--accent-primary);
 }
 
+.links-card .brand-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.links-card .external-icon {
+    width: 13px;
+    height: 13px;
+    margin-left: auto;
+    flex-shrink: 0;
+    color: var(--text-subtle);
+}
+
+.links-card a:hover .external-icon {
+    color: var(--accent-primary);
+}
+
 /* --------------------------------------------------------------------------
    ディレクトリツリー
    -------------------------------------------------------------------------- */
@@ -100,7 +139,9 @@
 }
 
 .dir-tree-card a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
     flex: 1;
     min-width: 0;
     padding: var(--space-xs) var(--space-sm);
@@ -108,6 +149,18 @@
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
+}
+
+.dir-tree-card a svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--text-subtle);
+}
+
+.dir-tree-card a:hover svg,
+.dir-tree-card a[aria-current="page"] svg {
+    color: var(--accent-primary);
 }
 
 .dir-tree-card a:hover {

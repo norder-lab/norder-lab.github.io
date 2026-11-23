@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="./css/transitions.css">
         <link rel="stylesheet" href="./css/main.css">
 
+        <!-- Lucide アイコン -->
+        <script src="https://unpkg.com/lucide@latest" defer></script>
+
         <!-- Alpine.js プラグイン -->
         <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
@@ -36,8 +39,16 @@
                         <h2 id="profile-heading">norder</h2>
                         <p class="subtitle">情報系/データサイエンス専攻の大学生</p>
                         <nav class="external-links" aria-label="外部プロフィールリンク">
-                            <a href="https://github.com/norder-lab" target="_blank" rel="noopener noreferrer">GitHub</a>
-                            <a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">Qiita</a>
+                            <a href="https://github.com/norder-lab" target="_blank" rel="noopener noreferrer">
+                                <img src="https://cdn.simpleicons.org/github/5e81ac" alt="" class="brand-icon" aria-hidden="true">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="external-icon" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">
+                                <img src="https://cdn.simpleicons.org/qiita/5e81ac" alt="" class="brand-icon" aria-hidden="true">
+                                <span>Qiita</span>
+                                <i data-lucide="arrow-up-right" class="external-icon" aria-hidden="true"></i>
+                            </a>
                         </nav>
                     </div>
                 </div>
@@ -45,36 +56,36 @@
 
             <section>
 
-                <h2>about</h2>
+                <h2><i data-lucide="user" aria-hidden="true"></i><span>about</span></h2>
 
                 <p>情報系 / データサイエンス専攻の大学生です.</p>
                 <p>2019年に Java のオブジェクト指向からプログラミングを始め, そこで培った設計思想をベースに現在は Rust や Python を主軸として開発を行っています.<br><br></p>
                 <p>自作ツール(TUI / GUI)や大学の課題で制作したプロダクト, 普段の開発環境の設定ファイルなどを GitHub で公開しています. また, Qiita では個人開発の知見や技術検証, 学びの備忘録などを発信しています.</p>
 
-                <h2>design stance</h2>
+                <h2><i data-lucide="compass" aria-hidden="true"></i><span>design stance</span></h2>
 
                 <p>特定の OS やマシンスペックに依存しない「疎結合でシンプルな設計」を重視しています.</p>
                 <p>マウスを介さずキーボード完結で扱える軽快な操作感を追求しており, 自作の TUI ツールには原則として Vim キーバインドを標準実装しており, テーマカラーには <a href="https://www.nordtheme.com/" target="_blank" rel="noopener noreferrer">Nord Theme</a> を使用し, モダンなUIを標準としています.</p>
 
-                <h2>main language stack</h2>
+                <h2><i data-lucide="code-xml" aria-hidden="true"></i><span>main language stack</span></h2>
 
                 <table class="lang-table">
                     <tr>
-                        <th>Java</th>
+                        <th><span class="lang-cell"><img src="https://cdn.simpleicons.org/openjdk/5e81ac" alt="" class="brand-icon" aria-hidden="true">Java</span></th>
                         <td>2019年に初めて触れた言語. 設計思想の基盤であり, 複雑な状態管理や安定した動作が求められるゲーム開発の主軸.</td>
                     </tr>
                     <tr>
-                        <th>Rust</th>
+                        <th><span class="lang-cell"><img src="https://cdn.simpleicons.org/rust/5e81ac" alt="" class="brand-icon" aria-hidden="true">Rust</span></th>
                         <td>メモリ安全性と高速性が求められる, 信頼性の高い TUI/CLI ツール開発の主軸.</td>
                     </tr>
                     <tr>
-                        <th>Python</th>
+                        <th><span class="lang-cell"><img src="https://cdn.simpleicons.org/python/5e81ac" alt="" class="brand-icon" aria-hidden="true">Python</span></th>
                         <td>データ分析, 機械学習, および豊富なエコシステムを活用したプロトタイピングの主軸.</td>
                     </tr>
                 </table>
                 <a>言語選定理由</a>
 
-                <h2>vision</h2>
+                <h2><i data-lucide="sparkles" aria-hidden="true"></i><span>vision</span></h2>
 
                 <p> AI や時代の変化によって扱う技術領域が大きく移り変わっても, 常に好奇心を持って柔軟に適応し続けられるエンジニアを目指しています. また, 今後は機械学習モデルと実用的なプロダクトを掛け合わせたツール開発にも挑戦したいと思っています.</p>
 
@@ -82,7 +93,7 @@
 
             <section>
 
-                <h2>meta data</h2>
+                <h2><i data-lucide="info" aria-hidden="true"></i><span>meta data</span></h2>
 
                 <div class="meta-block">
                     <div class="meta-row">
@@ -102,31 +113,31 @@
                     <div class="meta-row">
                         <span class="meta-label">Environment</span>
                         <div class="tag-list">
-                            <span class="tag">WezTerm</span>
-                            <span class="tag">Neovim</span>
-                            <span class="tag">Yazi</span>
-                            <span class="tag">StartuiLauncher</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/wezterm/81a1c1" alt="" class="brand-icon" aria-hidden="true">WezTerm</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/neovim/81a1c1" alt="" class="brand-icon" aria-hidden="true">Neovim</span>
+                            <span class="tag"><i data-lucide="folder" aria-hidden="true"></i>Yazi</span>
+                            <span class="tag"><i data-lucide="rocket" aria-hidden="true"></i>StartuiLauncher</span>
                         </div>
                     </div>
 
                     <div class="meta-row">
                         <span class="meta-label">Main Stack</span>
                         <div class="tag-list">
-                            <span class="tag">Rust</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Java</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/rust/81a1c1" alt="" class="brand-icon" aria-hidden="true">Rust</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/python/81a1c1" alt="" class="brand-icon" aria-hidden="true">Python</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/openjdk/81a1c1" alt="" class="brand-icon" aria-hidden="true">Java</span>
                         </div>
                     </div>
 
                     <div class="meta-row">
                         <span class="meta-label">Other Stack</span>
                         <div class="tag-list">
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">SQL</span>
-                            <span class="tag">R</span>
-                            <span class="tag">C</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/javascript/81a1c1" alt="" class="brand-icon" aria-hidden="true">JavaScript</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/html5/81a1c1" alt="" class="brand-icon" aria-hidden="true">HTML</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/css/81a1c1" alt="" class="brand-icon" aria-hidden="true">CSS</span>
+                            <span class="tag"><i data-lucide="database" aria-hidden="true"></i>SQL</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/r/81a1c1" alt="" class="brand-icon" aria-hidden="true">R</span>
+                            <span class="tag"><img src="https://cdn.simpleicons.org/c/81a1c1" alt="" class="brand-icon" aria-hidden="true">C</span>
                         </div>
                     </div>
                 </div>
