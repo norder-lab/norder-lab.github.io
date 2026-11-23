@@ -1,6 +1,6 @@
 /* ==========================================================================
    tokens.css
-   Nord Theme の基本カラーパレット、および用途別のCSS変数（Dark / Light）を定義。
+   Nord Theme の基本カラーパレット、および用途別のCSS変数を定義。
    余白・角丸・フォントサイズなどの共通デザイン数値もここで一元管理する。
    ========================================================================== */
 
@@ -72,25 +72,4 @@
     --space-sm: 8px;
     --space-md: 16px;
     --space-lg: 24px;
-}
-
-[data-theme="dark"] {
-    /* background color */
-    --bg-base: var(--nord0);
-    --bg-surface: var(--nord1); /* ヘッダ・side-card・ステータスバーの面背景 */
-    --bg-hover: var(--nord2); /* リストのホバー時や現在地ツリーのハイライト背景 */
-
-    /* text color */
-    --text-main: var(--nord6); /* 見出しや本文のメイン文字 */
-    --text-muted: var(--nord4); /* 記事の日付・概要・サブテキスト */
-    --text-subtle: var(--nord3); /* 検索欄のプレースホルダーや控えめな注釈 */
-
-    /* border */
-    --border-subtle: var(--nord2); /* side-card の外枠や、線区切りリストの横線 */
-    --border-focus: var(--nord8); /* 検索バー入力中やアクティブ要素の枠線 */
-
-    /* accent / status color */
-
-    --accent-primary: var(--nord8); /* リンク・現在地・メイン強調色(Nord Frost系) */
-    --accent-secondary: var(--nord9); /* 言語ラベルやタグバッジのサブ強調色 */
 }

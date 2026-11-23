@@ -92,7 +92,6 @@ flowchart LR
 ### 3.3. CSS の責務境界
 
 - `reset.css`: `box-sizing` やデフォルトの余白初期化など, 配色や配置に依存しない無色透明なリセットのみを記述します.
-- `tokens.css`: Nord の基本 16 色 (`--nord0` から `--nord15`) と, 背景・文字・枠線等の用途別変数を定義します. Dark を標準とし, `[data-theme="light"]` 指定時のみ用途別変数の参照先を差し替えます.
 - `layout.css`: `title-bar`, 3 カラム (`side-panel` / `main-panel` / `side-panel`), `status-bar` の配置, 独立スクロール, 画面幅に応じたレイアウト調整を担当します.
 - `components.css`: `side-card`, 線区切りリスト, 検索バー, ページネーション, パレット等の単体パーツの装飾を担当します. 外側の配置や幅への依存は持たせません.
 - `transitions.css`: `@view-transition`, テーマ切替時の演出, スクロール連動のヘッダ表示切替, ホバー時のトランジション時間を集約します.
@@ -151,7 +150,6 @@ flowchart TB
 
 ### 4.2. カラーテーマと画面遷移演出
 
-- Nord Theme を採用し, Dark モードと Light モードを切り替え可能とします.
 - 選択されたテーマは `Persist` によりブラウザへ保存し, リロードや別ページ移動後も維持します.
 - テーマ切替時は `document.startViewTransition()` を用いて画面全体へ色が広がる演出を行います.
 - ページ間移動時は CSS の `@view-transition { navigation: auto; }` により滑らかな画面遷移を行います.
@@ -202,7 +200,7 @@ flowchart TB
 
 ### 6.2. ステップ 2: テーマ切替・遷移演出と UI ギミックの実装
 
-- **操作:** `palette.js`, `app.js`, `transitions.css` を作成し, Dark / Light 切替 (`Persist` + `startViewTransition`), `@view-transition`, サイドカードの `Collapse` 開閉, パレットのクリックコピー, 中央パネルのスクロール連動ヘッダ制御を実装します.
+- **操作:** `palette.js`, `app.js`, `transitions.css` を作成し, `@view-transition`, サイドカードの `Collapse` 開閉, パレットのクリックコピー, 中央パネルのスクロール連動ヘッダ制御を実装します.
 - **結果:** 見た目と基本インタラクションが全ページ共通で動作する状態になります.
 - **確認:** リロード後もテーマと開閉状態が保持されること, パレットクリックで正しいカラーコードがコピーされること, 下スクロールでヘッダが隠れることを確認します.
 
