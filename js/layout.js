@@ -126,10 +126,6 @@ class PortfolioLayout extends HTMLElement {
                 </aside>
 
             </div>
-
-            <!-- ステータスバー(下に常時表示) -->
-            <footer class="status-bar">
-            </footer>
         `;
 
         this.querySelectorAll('.dir-tree-card a').forEach((a) => {
