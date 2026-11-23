@@ -208,10 +208,6 @@ header.is-hidden {
         transform var(--duration-fast) var(--ease-out);
 }
 
-.item-list .list-item-link:hover .list-item-title {
-    transform: translateX(3px);
-}
-
 .item-list .list-item-lang {
     transition: border-color var(--duration-fast) var(--ease-out);
 }

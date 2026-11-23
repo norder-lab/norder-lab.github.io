@@ -335,5 +335,102 @@ document.addEventListener('alpine:init', () => {
         event.preventDefault();
         navigateTo(destination, { pushHistory: true });
     });
+
+    /**
+     * Vim 風キーボードショートカット
+     * - 1-4 : ページ移動（index / profile / products / articles）
+     * - j/k : main-panel の上下スクロール
+     * - gg  : main-panel の最上部へ移動
+     * - G   : main-panel の最下部へ移動
+     */
+    const PAGE_SHORTCUTS = {
+        '1': './index.html',
+        '2': './profile.html',
+        '3': './products.html',
+        '4': './articles.html',
+    };
+    const SCROLL_STEP_PX = 120;
+    const GG_TIMEOUT_MS = 500;
+
+    let pendingG = false;
+    let pendingGTimer = null;
+
+    function resetPendingG() {
+        pendingG = false;
+        clearTimeout(pendingGTimer);
+        pendingGTimer = null;
+    }
+
+    function isEditableTarget(target) {
+        if (!(target instanceof Element)) return false;
+        return Boolean(target.closest('input, textarea, select, [contenteditable=""], [contenteditable="true"]'));
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.defaultPrevented || event.isComposing) return;
+        if (event.ctrlKey || event.metaKey || event.altKey) return;
+
+        // 入力欄フォーカス中は誤爆を防ぎ、Escape でのフォーカス解除のみ許可
+        if (isEditableTarget(event.target)) {
+            if (event.key === 'Escape') {
+                event.target.blur();
+            }
+            resetPendingG();
+            return;
+        }
+
+        const key = event.key;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const smoothBehavior = reducedMotion ? 'auto' : 'smooth';
+
+        // 1-4: ページジャンプ
+        if (PAGE_SHORTCUTS[key]) {
+            resetPendingG();
+            const destination = new URL(PAGE_SHORTCUTS[key], location.href);
+            const currentFile = location.pathname.split('/').pop() || 'index.html';
+            const nextFile = destination.pathname.split('/').pop() || 'index.html';
+            if (nextFile !== currentFile) {
+                event.preventDefault();
+                navigateTo(destination, { pushHistory: true });
+            }
+            return;
+        }
+
+        const mainPanel = document.querySelector('.main-panel');
+        if (!mainPanel) return;
+
+        // gg: 最上部へ
+        if (key === 'g') {
+            event.preventDefault();
+            if (pendingG) {
+                resetPendingG();
+                mainPanel.scrollTo({ top: 0, behavior: smoothBehavior });
+            } else {
+                pendingG = true;
+                clearTimeout(pendingGTimer);
+                pendingGTimer = setTimeout(resetPendingG, GG_TIMEOUT_MS);
+            }
+            return;
+        }
+
+        resetPendingG();
+
+        // G: 最下部へ
+        if (key === 'G') {
+            event.preventDefault();
+            mainPanel.scrollTo({ top: mainPanel.scrollHeight, behavior: smoothBehavior });
+            return;
+        }
+
+        // j / k: 上下スクロール（押しっぱなし時は途切れないよう auto）
+        if (key === 'j' || key === 'k') {
+            event.preventDefault();
+            const delta = key === 'j' ? SCROLL_STEP_PX : -SCROLL_STEP_PX;
+            mainPanel.scrollBy({
+                top: delta,
+                behavior: event.repeat || reducedMotion ? 'auto' : 'smooth',
+            });
+        }
+    });
 })();
 

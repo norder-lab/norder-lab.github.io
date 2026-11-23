@@ -93,7 +93,8 @@ class PortfolioLayout extends HTMLElement {
                         <div class="keybind-list">
                             <div class="keybind"><span>page jump</span><kbd>1-4</kbd></div>
                             <div class="keybind"><span>scroll</span><kbd>j / k</kbd></div>
-                            <div class="keybind"><span>search</span><kbd>/</kbd></div>
+                            <div class="keybind"><span>top</span><kbd>gg</kbd></div>
+                            <div class="keybind"><span>bottom</span><kbd>G</kbd></div>
                         </div>
                     </div>
 
