@@ -104,11 +104,6 @@ section > h2 svg {
     height: 18px;
     flex-shrink: 0;
     color: var(--accent-primary);
-    transition: transform 0.15s ease, color 0.15s ease;
-}
-
-.page-link-card:hover .page-link-head .link-arrow {
-    transform: translateX(4px);
 }
 
 .page-link-card .page-description {
@@ -143,6 +138,10 @@ section > h2 svg {
     min-width: 0;
     font-size: var(--text-lg);
     font-weight: 700;
+    color: var(--text-main);
+}
+
+.recent-link-card:hover h3 {
     color: var(--accent-primary);
 }
 
@@ -394,7 +393,6 @@ section > h2 svg {
 .list-item-link {
     display: block;
     padding: var(--space-md) var(--space-sm);
-    transition: background-color 0.15s ease;
 }
 
 .list-item-link:hover {
@@ -414,7 +412,6 @@ section > h2 svg {
     font-size: var(--text-lg);
     font-weight: 700;
     color: var(--text-main);
-    transition: color 0.15s ease;
 }
 
 .list-item-link:hover .list-item-title {
