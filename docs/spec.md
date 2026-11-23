@@ -60,6 +60,7 @@ portfolio/
 │   ├── tokens.css          # Nord Theme のカラー・デザイン数値の CSS 変数定義
 │   ├── layout.css          # ヘッダ・3 ペイン・ステータスバーの全体骨格とスクロール制御
 │   ├── components.css      # カード・線区切りリスト・検索バー・ページネーション等の部品
+│   ├── main.css            # main-panel直下のhomeやprofileの部品
 │   └── transitions.css     # View Transitions やヘッダ開閉等のアニメーション演出
 └── js/
     ├── layout.js           # <portfolio-layout> の DOM 展開と現在地ハイライト
