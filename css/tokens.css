@@ -35,8 +35,8 @@
     --nord15: #b48ead;
 
     /* background color */
-    --bg-base: var(--nord6);
-    --bg-surface: var(--white); /* ヘッダ・side-card・ステータスバーの面背景 */
+    --bg-base: var(--white);
+    --bg-surface: var(--nord6); /* ヘッダ・side-card・ステータスバーの面背景 */
     --bg-hover: var(--nord5); /* リストのホバー時や現在地ツリーのハイライト背景 */
 
     /* text color */
@@ -45,7 +45,7 @@
     --text-subtle: var(--nord2); /* 検索欄のプレースホルダーや控えめな注釈 */
 
     /* border */
-    --border-subtle: var(--nord4); /* side-card の外枠や、線区切りリストの横線 */
+    --border-subtle: var(--nord5); /* side-card の外枠や、線区切りリストの横線 */
     --border-focus: var(--nord8); /* 検索バー入力中やアクティブ要素の枠線 */
 
     /* accent / status color */

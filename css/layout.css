@@ -20,21 +20,20 @@ portfolio-layout {
 
 /* ヘッダ */
 header {
-    height: 48px;
+    height: 64px;
     padding: 0 var(--space-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
     overflow: hidden;
 
-    background-color: var(--bg-surface);
-    border-bottom: 1px solid var(--border-subtle);
+    background-color: transparent;
 }
 
 /* 中央3ペイン構成 */
 .central-panel {
     display: grid;
-    grid-template-columns: 240px minmax(0, 1fr) 260px;
+    grid-template-columns: 320px minmax(0, 1fr) 320px;
     min-height: 0;
     overflow: hidden;
 }
@@ -76,12 +75,12 @@ footer {
     justify-content: space-between;
     align-items: center;
 
-    background-color: var(--bg-surface);
+    background-color: var(--bg-main);
     border-top: 1px solid var(--border-subtle);
 }
 
 /* レスポンシブ対応（狭い画面では1カラム化） */
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
     .central-panel {
         grid-template-columns: 1fr;
     }
@@ -94,3 +93,4 @@ footer {
         padding: var(--space-md);
     }
 }
+
