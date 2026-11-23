@@ -58,12 +58,7 @@ header {
 /* 中央メインパネル（独立スクロール） */
 .main-panel {
     min-width: 0;
-    padding: var(--space-lg);
-}
-
-.main-panel > * {
-    max-width: 800px;
-    margin-inline: auto;
+    padding: var(--space-lg) var(--space-xl);
 }
 
 /* ステータスバー */
