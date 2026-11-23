@@ -59,8 +59,9 @@
     --status-error: var(--nord11);
 
     /* サイズ・余白・フォント(テーマ共通) */
-    --font-sans: system-ui, -apple-system, sans-serif;
-    --font-mono: ui-monospace, "Cascadia Code", "JetBrains Mono", monospace;
+    --font-text: "BIZ UDGothic", sans-serif;
+    --font-title: "Kosugi Maru", sans-serif;
+    --font-en-title: "Smooch Sans", sans-serif;
 
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
@@ -69,6 +70,7 @@
     --text-xl: 1.5rem;
     --text-xxl: 1.8rem;
     --text-xxxl: 2.3rem;
+    --text-xxxxl: 3.6rem;
 
     --radius-sm: 4px;
     --radius-md: 6px;

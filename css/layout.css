@@ -14,7 +14,7 @@ portfolio-layout {
 
     background-color: var(--bg-base);
     color: var(--text-main);
-    font-family: var(--font-sans);
+    font-family: var(--font-text);
     font-size: var(--text-base);
 }
 
