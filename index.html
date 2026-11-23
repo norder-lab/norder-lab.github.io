@@ -64,37 +64,47 @@
                 </div>
             </section>
 
-            <section>
-                <h2><i data-lucide="folder-code" aria-hidden="true"></i><span>recent products</span></h2>
-                <div class="recent-link-card">
-                    <a href="">
-                        <h3>products</h3>
-                        <p class="recent-meta-data">java</p>
-                    </a>
-                </div>
-                <div class="recent-link-card">
-                    <a href="">
-                        <h3>products</h3>
-                        <p class="recent-meta-data">rust</p>
-                    </a>
-                </div>
-            </section>
+            <div x-data="homePage">
+                <section>
+                    <h2><i data-lucide="folder-code" aria-hidden="true"></i><span>recent products</span></h2>
+                    <p class="list-status" x-show="loadingProducts">Loading repositories from GitHub...</p>
+                    <p class="list-status" x-show="!loadingProducts && errorProducts" x-cloak>
+                        取得できませんでした。
+                        <a href="https://github.com/norder-lab?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub で確認する</a>
+                    </p>
+                    <p class="list-status" x-show="!loadingProducts && !errorProducts && recentProducts.length === 0" x-cloak>
+                        公開中のプロダクトはまだありません。
+                    </p>
+                    <template x-for="repo in recentProducts" :key="repo.name">
+                        <div class="recent-link-card" x-cloak>
+                            <a :href="repo.html_url" target="_blank" rel="noopener noreferrer">
+                                <h3 x-text="repo.name"></h3>
+                                <p class="recent-meta-data" x-show="repo.language" x-text="repo.language"></p>
+                            </a>
+                        </div>
+                    </template>
+                </section>
 
-            <section>
-                <h2><i data-lucide="file-text" aria-hidden="true"></i><span>recent articles</span></h2>
-                <div class="recent-link-card">
-                    <a href="">
-                        <h3>articles</h3>
-                        <p class="recent-meta-data">yyyy/mm/dd</p>
-                    </a>
-                </div>
-                <div class="recent-link-card">
-                    <a href="">
-                        <h3>articles</h3>
-                        <p class="recent-meta-data">yyyy/mm/dd</p>
-                    </a>
-                </div>
-            </section>
+                <section>
+                    <h2><i data-lucide="file-text" aria-hidden="true"></i><span>recent articles</span></h2>
+                    <p class="list-status" x-show="loadingArticles">Loading articles from Qiita...</p>
+                    <p class="list-status" x-show="!loadingArticles && errorArticles" x-cloak>
+                        取得できませんでした。
+                        <a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">Qiita で確認する</a>
+                    </p>
+                    <p class="list-status" x-show="!loadingArticles && !errorArticles && recentArticles.length === 0" x-cloak>
+                        公開中の記事はまだありません。
+                    </p>
+                    <template x-for="article in recentArticles" :key="article.id">
+                        <div class="recent-link-card" x-cloak>
+                            <a :href="article.url" target="_blank" rel="noopener noreferrer">
+                                <h3 x-text="article.title"></h3>
+                                <time class="recent-meta-data" :datetime="article.datetime" x-text="article.date"></time>
+                            </a>
+                        </div>
+                    </template>
+                </section>
+            </div>
 
         </portfolio-layout>
     </body>

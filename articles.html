@@ -33,125 +33,58 @@
         <portfolio-layout>
             <h1>ARTICLES</h1>
 
-            <div class="search-bar">
-                <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
-                <input
-                    type="search"
-                    id="article-search"
-                    class="search-input"
-                    placeholder="Search articles... (/)"
-                    aria-label="記事を検索"
-                >
+            <div x-data="articlesPage">
+                <div class="search-bar">
+                    <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="article-search"
+                        class="search-input"
+                        placeholder="Search articles... (/)"
+                        aria-label="記事を検索"
+                        x-model="query"
+                    >
+                </div>
+
+                <p class="list-status" x-show="loading">Loading articles from Qiita...</p>
+
+                <p class="list-status" x-show="!loading && error" x-cloak>
+                    記事一覧を取得できませんでした。
+                    <a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">Qiita で確認する</a>
+                </p>
+
+                <p class="list-status" x-show="!loading && !error && filtered.length === 0" x-cloak
+                   x-text="items.length === 0 ? '公開中の記事はまだありません。' : '該当する記事が見つかりませんでした。'">
+                </p>
+
+                <ul class="item-list" aria-label="記事一覧" aria-live="polite" x-show="!loading && !error && paginated.length > 0" x-cloak>
+                    <template x-for="article in paginated" :key="article.id">
+                        <li class="list-item">
+                            <a :href="article.url" target="_blank" rel="noopener noreferrer" class="list-item-link">
+                                <div class="list-item-head">
+                                    <h2 class="list-item-title" x-text="article.title"></h2>
+                                    <time class="list-item-date" :datetime="article.datetime" x-text="article.date"></time>
+                                </div>
+                                <div class="tag-list list-item-tags" x-show="article.tags.length > 0">
+                                    <template x-for="tag in article.tags" :key="tag">
+                                        <span class="tag" x-text="tag"></span>
+                                    </template>
+                                </div>
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+
+                <nav class="pagination" aria-label="ページネーション" x-show="!loading && !error && filtered.length > 0" x-cloak>
+                    <button type="button" class="pagination-btn" aria-label="前のページ" @click="prevPage()" :disabled="page <= 1">
+                        <i data-lucide="chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <span class="pagination-info" aria-current="page" x-text="`${page} / ${totalPages}`">1 / 1</span>
+                    <button type="button" class="pagination-btn" aria-label="次のページ" @click="nextPage()" :disabled="page >= totalPages">
+                        <i data-lucide="chevron-right" aria-hidden="true"></i>
+                    </button>
+                </nav>
             </div>
-
-            <ul class="item-list" aria-label="記事一覧">
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 01</h2>
-                            <time class="list-item-date" datetime="2026-11-20">2026/11/20</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">Rust</span>
-                            <span class="tag">TUI</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 02</h2>
-                            <time class="list-item-date" datetime="2026-11-15">2026/11/15</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">DataScience</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 03</h2>
-                            <time class="list-item-date" datetime="2026-11-10">2026/11/10</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">Neovim</span>
-                            <span class="tag">CLI</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 04</h2>
-                            <time class="list-item-date" datetime="2026-11-05">2026/11/05</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">Java</span>
-                            <span class="tag">設計</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 05</h2>
-                            <time class="list-item-date" datetime="2026-10-28">2026/10/28</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 06</h2>
-                            <time class="list-item-date" datetime="2026-10-20">2026/10/20</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">Rust</span>
-                            <span class="tag">CLI</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 07</h2>
-                            <time class="list-item-date" datetime="2026-10-12">2026/10/12</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">WezTerm</span>
-                            <span class="tag">Nord</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">記事タイトル 08</h2>
-                            <time class="list-item-date" datetime="2026-10-01">2026/10/01</time>
-                        </div>
-                        <div class="tag-list list-item-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">機械学習</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-
-            <nav class="pagination" aria-label="ページネーション">
-                <button type="button" class="pagination-btn" aria-label="前のページ" disabled>
-                    <i data-lucide="chevron-left" aria-hidden="true"></i>
-                </button>
-                <span class="pagination-info" aria-current="page">1 / 3</span>
-                <button type="button" class="pagination-btn" aria-label="次のページ">
-                    <i data-lucide="chevron-right" aria-hidden="true"></i>
-                </button>
-            </nav>
         </portfolio-layout>
     </body>
 

@@ -132,12 +132,15 @@ section > h2 svg {
 }
 
 .recent-link-card a {
-    padding: var(--space-sm) var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
 }
 
 .recent-link-card h3 {
+    min-width: 0;
     font-size: var(--text-lg);
     font-weight: 700;
     color: var(--accent-primary);
@@ -145,11 +148,14 @@ section > h2 svg {
 
 .recent-link-card .recent-meta-data {
     margin: auto 0;
-    padding: 0 var(--space-xs);
+    padding: 2px var(--space-xs);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
     font-size: var(--text-xs);
     color: var(--accent-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -442,6 +448,24 @@ section > h2 svg {
 
 .list-item-tags {
     margin-top: var(--space-xs);
+}
+
+.list-status {
+    padding: var(--space-lg) 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.list-status a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+[x-cloak] {
+    display: none !important;
 }
 
 .pagination {

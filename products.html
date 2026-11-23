@@ -33,101 +33,54 @@
         <portfolio-layout>
             <h1>PRODUCTS</h1>
 
-            <div class="search-bar">
-                <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
-                <input
-                    type="search"
-                    id="product-search"
-                    class="search-input"
-                    placeholder="Search products... (/)"
-                    aria-label="プロダクトを検索"
-                >
+            <div x-data="productsPage">
+                <div class="search-bar">
+                    <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="product-search"
+                        class="search-input"
+                        placeholder="Search products... (/)"
+                        aria-label="プロダクトを検索"
+                        x-model="query"
+                    >
+                </div>
+
+                <p class="list-status" x-show="loading">Loading repositories from GitHub...</p>
+
+                <p class="list-status" x-show="!loading && error" x-cloak>
+                    リポジトリ一覧を取得できませんでした。
+                    <a href="https://github.com/norder-lab?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub で確認する</a>
+                </p>
+
+                <p class="list-status" x-show="!loading && !error && filtered.length === 0" x-cloak
+                   x-text="items.length === 0 ? '公開中のプロダクトはまだありません。' : '該当するプロダクトが見つかりませんでした。'">
+                </p>
+
+                <ul class="item-list" aria-label="プロダクト一覧" aria-live="polite" x-show="!loading && !error && paginated.length > 0" x-cloak>
+                    <template x-for="repo in paginated" :key="repo.name">
+                        <li class="list-item">
+                            <a :href="repo.html_url" target="_blank" rel="noopener noreferrer" class="list-item-link">
+                                <div class="list-item-head">
+                                    <h2 class="list-item-title" x-text="repo.name"></h2>
+                                    <span class="list-item-lang" x-show="repo.language" x-text="repo.language"></span>
+                                </div>
+                                <p class="list-item-desc" x-text="repo.description || 'No description provided.'"></p>
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+
+                <nav class="pagination" aria-label="ページネーション" x-show="!loading && !error && filtered.length > 0" x-cloak>
+                    <button type="button" class="pagination-btn" aria-label="前のページ" @click="prevPage()" :disabled="page <= 1">
+                        <i data-lucide="chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <span class="pagination-info" aria-current="page" x-text="`${page} / ${totalPages}`">1 / 1</span>
+                    <button type="button" class="pagination-btn" aria-label="次のページ" @click="nextPage()" :disabled="page >= totalPages">
+                        <i data-lucide="chevron-right" aria-hidden="true"></i>
+                    </button>
+                </nav>
             </div>
-
-            <ul class="item-list" aria-label="プロダクト一覧">
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-01</h2>
-                            <span class="list-item-lang">Rust</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-02</h2>
-                            <span class="list-item-lang">Python</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-03</h2>
-                            <span class="list-item-lang">Java</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-04</h2>
-                            <span class="list-item-lang">Rust</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-05</h2>
-                            <span class="list-item-lang">Python</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-06</h2>
-                            <span class="list-item-lang">JavaScript</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-07</h2>
-                            <span class="list-item-lang">Java</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-                <li class="list-item">
-                    <a href="" class="list-item-link">
-                        <div class="list-item-head">
-                            <h2 class="list-item-title">product-08</h2>
-                            <span class="list-item-lang">Rust</span>
-                        </div>
-                        <p class="list-item-desc">プロダクトの説明文がここに入ります。</p>
-                    </a>
-                </li>
-            </ul>
-
-            <nav class="pagination" aria-label="ページネーション">
-                <button type="button" class="pagination-btn" aria-label="前のページ" disabled>
-                    <i data-lucide="chevron-left" aria-hidden="true"></i>
-                </button>
-                <span class="pagination-info" aria-current="page">1 / 3</span>
-                <button type="button" class="pagination-btn" aria-label="次のページ">
-                    <i data-lucide="chevron-right" aria-hidden="true"></i>
-                </button>
-            </nav>
         </portfolio-layout>
     </body>
 
