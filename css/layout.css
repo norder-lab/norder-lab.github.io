@@ -43,8 +43,7 @@ header {
 .main-panel {
     min-height: 0;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--border-subtle) transparent;
+    scrollbar-width: none;
 }
 
 /* 左右サイドパネル */
