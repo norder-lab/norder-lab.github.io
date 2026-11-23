@@ -1,92 +1,117 @@
 /**
-    * ==========================================================================
-    * layout.js
-    * Web Components (<portfolio-layout>) による共通外枠（ヘッダ / 3ペイン /
-    * ステータスバー）のDOM展開、および現在URLに基づくツリー現在地判定を担当。
-    * ※状態管理・API通信・イベント制御は app.js 側に分離し、ここには書かない。
-    * ==========================================================================
-    */
+ * ==========================================================================
+ * layout.js
+ * Web Components (<portfolio-layout>) による共通外枠（ヘッダ / 3ペイン /
+ * ステータスバー）のDOM展開、および現在URLに基づくツリー現在地判定を担当。
+ * ※状態管理・API通信・イベント制御は app.js 側に分離し、ここには書かない。
+ * ==========================================================================
+ */
 
-    class PortfolioLayout extends HTMLElement {
-        connectedCallback() {
-            if (this.dataset.initialized) return;
-            this.dataset.initialized = 'true';
-            const content = this.innerHTML;
-            this.innerHTML = `
-                <header>
-                    <p class="site-title">norder's portfolio</p>
-                    <button type="button" class="theme-btn" id="theme-toggle">dark</button>
-                </header>
+class PortfolioLayout extends HTMLElement {
+    connectedCallback() {
+        if (this.dataset.initialized) return;
+        this.dataset.initialized = 'true';
+        const content = this.innerHTML;
+        const current = location.pathname.split('/').pop() || 'index.html';
 
-                <div class="central-panel">
+        this.innerHTML = `
+            <header>
+                <a href="./index.html" class="site-title">norder's portfolio</a>
+            </header>
 
-                    <!-- 左サイドパネル -->
-                    <aside class="side-panel">
+            <div class="central-panel">
 
-                        <!-- 名前カード -->
-                        <div class="side-card name-card">
-                            <img src="https://github.com/norder-lab.png" alt="norder's icon"/>
-                            <p>norder</p>
+                <!-- 左サイドパネル -->
+                <aside class="side-panel">
+
+                    <!-- 名前カード -->
+                    <div class="side-card name-card">
+                        <img src="https://github.com/norder-lab.png" alt="norder's icon" onerror="this.src='./assets/fallback-avatar.svg'"/>
+                        <p>norder</p>
+                    </div>
+
+                    <!-- Qiita / GitHub カード -->
+                    <div class="side-card links-card">
+                        <h2>links</h2>
+                        <div class="links-list">
+                            <a href="https://github.com/norder-lab" target="_blank" rel="noopener noreferrer">
+                                <span>GitHub</span>
+                            </a>
+                            <a href="https://qiita.com/norder" target="_blank" rel="noopener noreferrer">
+                                <span>Qiita</span>
+                            </a>
                         </div>
+                    </div>
 
-                        <!-- Qiita / GitHub カード -->
-                        <div class="side-card links-card">
-                            <h2>links</h2>
-                            <div> </div>
-                            <div> </div>
+                    <!-- ディレクトリツリーカード -->
+                    <nav class="side-card dir-tree-card">
+                        <h2>directory tree</h2>
+                        <ul x-show="cards.tree" x-collapse>
+                            <li><a href="./index.html">&frasl;home ~</a></li>
+                            <li><a href="./profile.html">profile</a></li>
+                            <li><a href="./products.html">products</a></li>
+                            <li><a href="./articles.html">articles</a></li>
+                        </ul>
+                    </nav>
+
+                </aside>
+
+                <main class="main-panel" @scroll="handleScroll($event)">
+                    ${content}
+                    <hr>
+                    <p class="copyright">© 2026- norder</p>
+                </main>
+
+                <!-- 右サイドパネル -->
+                <aside class="side-panel">
+
+                    <!-- キーバインドカード -->
+                    <div class="side-card keybinds-card">
+                        <h2>keybind</h2>
+                        <div class="keybind-list">
+                            <div class="keybind"><span>page jump</span><kbd>1-4</kbd></div>
+                            <div class="keybind"><span>scroll</span><kbd>j / k</kbd></div>
+                            <div class="keybind"><span>search</span><kbd>/</kbd></div>
                         </div>
+                    </div>
 
-                        <!-- ディレクトリツリーカード -->
-                        <nav class="side-card dir-tree-card">
-                            <h2>directory tree</h2>
-                            <ul>
-                                <li><a href="./index.html">&frasl;home ~</a></li>
-                                <li><a href="./profile.html">profile</a></li>
-                                <li><a href="./products.html">products</a></li>
-                                <li><a href="./articles.html">articles</a></li>
-                            </ul>
-                        </nav>
-
-                    </aside>
-
-                    <main class="main-panel">
-                        ${content}
-                        <hr>
-                        <p>© 2026- norder</p>
-                    </main>
-
-                    <!-- 右サイドパネル -->
-                    <aside class="side-panel">
-
-                        <!-- キーバインドカード -->
-                        <div class="side-card keybinds-card">
-                            <h2>keybind</h2>
-                            <div class="keybind"></div>
-                            <div class="keybind"></div>
-                            <div class="keybind"></div>
+                    <!-- パレットカード -->
+                    <div class="side-card palette-card">
+                        <h2>nord palette</h2>
+                        <div class="palette-grid">
+                            <div class="palette-swatch nord0" style="background-color: var(--nord0)"></div>
+                            <div class="palette-swatch nord1" style="background-color: var(--nord1)"></div>
+                            <div class="palette-swatch nord2" style="background-color: var(--nord2)"></div>
+                            <div class="palette-swatch nord3" style="background-color: var(--nord3)"></div>
+                            <div class="palette-swatch nord4" style="background-color: var(--nord4)"></div>
+                            <div class="palette-swatch nord5" style="background-color: var(--nord5)"></div>
+                            <div class="palette-swatch nord6" style="background-color: var(--nord6)"></div>
+                            <div class="palette-swatch nord7" style="background-color: var(--nord7)"></div>
+                            <div class="palette-swatch nord8" style="background-color: var(--nord8)"></div>
+                            <div class="palette-swatch nord9" style="background-color: var(--nord9)"></div>
+                            <div class="palette-swatch nord10" style="background-color: var(--nord10)"></div>
+                            <div class="palette-swatch nord11" style="background-color: var(--nord11)"></div>
+                            <div class="palette-swatch nord12" style="background-color: var(--nord12)"></div>
+                            <div class="palette-swatch nord13" style="background-color: var(--nord13)"></div>
+                            <div class="palette-swatch nord14" style="background-color: var(--nord14)"></div>
+                            <div class="palette-swatch nord15" style="background-color: var(--nord15)"></div>
                         </div>
+                    </div>
 
-                        <!-- パレットカード -->
-                        <div class="side-card palette-card">
-                            <h2>nord palette</h2>
-                            <div class="palette-grid"> </div>
-                        </div>
+                </aside>
 
-                    </aside>
+            </div>
 
-                </div>
+            <!-- ステータスバー(下に常時表示) -->
+            <footer class="status-bar">
+            </footer>
+        `;
 
-                <!-- ステータスバー(下に常時表示) -->
-                <footer class="status-bar">
-                </footer>
-            `;
-
-            const current = location.pathname.split('/').pop() || 'index.html';
-            this.querySelectorAll('.dir-tree-card a').forEach((a) => {
-                if (a.getAttribute('href')?.endsWith(current)) {
-                    a.setAttribute('aria-current', 'page');
-                }
-            });
-        }
+        this.querySelectorAll('.dir-tree-card a').forEach((a) => {
+            if (a.getAttribute('href')?.endsWith(current)) {
+                a.setAttribute('aria-current', 'page');
+            }
+        });
     }
+}
 customElements.define('portfolio-layout', PortfolioLayout);
