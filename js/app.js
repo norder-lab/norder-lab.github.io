@@ -78,6 +78,30 @@ function createPaginatedList({ fetcher, toHaystack, perPage = 8 }) {
 }
 
 document.addEventListener('alpine:init', () => {
+    Alpine.data('paletteCard', () => ({
+        colors: window.NordPalette?.colors || [],
+        copiedName: '',
+        copiedText: '',
+        timerId: null,
+
+        async copyColor(color) {
+            if (!window.NordPalette) return;
+            try {
+                await window.NordPalette.copy(color.hex);
+                this.copiedName = color.name;
+                this.copiedText = `copied: ${color.hex}`;
+                clearTimeout(this.timerId);
+                this.timerId = setTimeout(() => {
+                    this.copiedName = '';
+                    this.copiedText = '';
+                }, 1500);
+            } catch {
+                this.copiedName = '';
+                this.copiedText = 'copy failed';
+            }
+        },
+    }));
+
     Alpine.data('productsPage', createPaginatedList({
         fetcher: () => window.PortfolioAPI.fetchGithubRepos(),
         toHaystack: (repo) => [repo.name, repo.description, repo.language],

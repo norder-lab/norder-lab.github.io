@@ -98,7 +98,7 @@ class PortfolioLayout extends HTMLElement {
                     </div>
 
                     <!-- パレットカード -->
-                    <div class="side-card palette-card">
+                    <div class="side-card palette-card" x-data="paletteCard">
                         <h2>
                             <span class="card-heading">
                                 <i data-lucide="palette" aria-hidden="true"></i>
@@ -106,23 +106,20 @@ class PortfolioLayout extends HTMLElement {
                             </span>
                         </h2>
                         <div class="palette-grid">
-                            <div class="palette-swatch nord0" style="background-color: var(--nord0)"></div>
-                            <div class="palette-swatch nord1" style="background-color: var(--nord1)"></div>
-                            <div class="palette-swatch nord2" style="background-color: var(--nord2)"></div>
-                            <div class="palette-swatch nord3" style="background-color: var(--nord3)"></div>
-                            <div class="palette-swatch nord4" style="background-color: var(--nord4)"></div>
-                            <div class="palette-swatch nord5" style="background-color: var(--nord5)"></div>
-                            <div class="palette-swatch nord6" style="background-color: var(--nord6)"></div>
-                            <div class="palette-swatch nord7" style="background-color: var(--nord7)"></div>
-                            <div class="palette-swatch nord8" style="background-color: var(--nord8)"></div>
-                            <div class="palette-swatch nord9" style="background-color: var(--nord9)"></div>
-                            <div class="palette-swatch nord10" style="background-color: var(--nord10)"></div>
-                            <div class="palette-swatch nord11" style="background-color: var(--nord11)"></div>
-                            <div class="palette-swatch nord12" style="background-color: var(--nord12)"></div>
-                            <div class="palette-swatch nord13" style="background-color: var(--nord13)"></div>
-                            <div class="palette-swatch nord14" style="background-color: var(--nord14)"></div>
-                            <div class="palette-swatch nord15" style="background-color: var(--nord15)"></div>
+                            <template x-for="color in colors" :key="color.name">
+                                <button
+                                    type="button"
+                                    class="palette-swatch"
+                                    :class="{ 'is-copied': copiedName === color.name }"
+                                    :style="{ backgroundColor: color.hex }"
+                                    :title="color.name + ' (' + color.hex + ')'"
+                                    :aria-label="color.name + ' ' + color.hex + ' をコピー'"
+                                    @click="copyColor(color)"
+                                ></button>
+                            </template>
                         </div>
+                        <p class="palette-feedback" :class="{ 'is-copied': Boolean(copiedText) }" aria-live="polite"
+                           x-text="copiedText || 'click a color to copy'"></p>
                     </div>
 
                 </aside>

@@ -136,9 +136,9 @@ section > h2 svg {
 
 .recent-link-card h3 {
     min-width: 0;
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     font-weight: 700;
-    color: var(--text-main);
+    color: var(--text-subtle);
 }
 
 .recent-link-card:hover h3 {
@@ -411,7 +411,7 @@ section > h2 svg {
     font-family: var(--font-mono);
     font-size: var(--text-lg);
     font-weight: 700;
-    color: var(--text-main);
+    color: var(--text-subtle);
 }
 
 .list-item-link:hover .list-item-title {

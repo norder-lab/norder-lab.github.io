@@ -208,14 +208,37 @@
 }
 
 .palette-swatch {
+    width: 100%;
+    padding: 0;
     aspect-ratio: 1;
     border-radius: var(--radius-sm);
     border: 2px solid var(--border-subtle);
     cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease;
 }
 
 .palette-swatch:hover {
     border-color: var(--border-focus);
+}
+
+.palette-swatch:active {
+    transform: scale(0.94);
+}
+
+.palette-swatch.is-copied {
+    border-color: var(--status-ok);
+}
+
+.palette-feedback {
+    margin-top: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-subtle);
+    text-align: center;
+}
+
+.palette-feedback.is-copied {
+    color: var(--accent-primary);
 }
 
 
