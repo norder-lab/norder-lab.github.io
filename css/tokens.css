@@ -3,3 +3,94 @@
    Nord Theme の基本カラーパレット、および用途別のCSS変数（Dark / Light）を定義。
    余白・角丸・フォントサイズなどの共通デザイン数値もここで一元管理する。
    ========================================================================== */
+
+:root {
+    
+    /* colors */
+
+    --white: #ffffff;
+
+    /* Polar Night */
+    --nord0: #2e3440;
+    --nord1: #3b4252;
+    --nord2: #434c5e;
+    --nord3: #4c566a;
+
+    /* Snow Storm */
+    --nord4: #d8dee9;
+    --nord5: #e5e9f0;
+    --nord6: #eceff4;
+
+    /* Frost */
+    --nord7: #8fbcbb;
+    --nord8: #88c0d0;
+    --nord9: #81a1c1;
+    --nord10: #5e81ac;
+
+    /* Aurora */
+    --nord11: #bf616a;
+    --nord12: #d08770;
+    --nord13: #ebcb8b;
+    --nord14: #a3be8c;
+    --nord15: #b48ead;
+
+    /* background color */
+    --bg-base: var(--nord6);
+    --bg-surface: var(--white); /* ヘッダ・side-card・ステータスバーの面背景 */
+    --bg-hover: var(--nord5); /* リストのホバー時や現在地ツリーのハイライト背景 */
+
+    /* text color */
+    --text-main: var(--nord0); /* 見出しや本文のメイン文字 */
+    --text-muted: var(--nord1); /* 記事の日付・概要・サブテキスト */
+    --text-subtle: var(--nord2); /* 検索欄のプレースホルダーや控えめな注釈 */
+
+    /* border */
+    --border-subtle: var(--nord4); /* side-card の外枠や、線区切りリストの横線 */
+    --border-focus: var(--nord8); /* 検索バー入力中やアクティブ要素の枠線 */
+
+    /* accent / status color */
+
+    --accent-primary: var(--nord10); /* リンク・現在地・メイン強調色(Nord Frost系) */
+    --accent-secondary: var(--nord9); /* 言語ラベルやタグバッジのサブ強調色 */
+    --status-ok: var(--nord14);
+    --status-warn: var(--nord13);
+    --status-error: var(--nord11);
+
+    /* サイズ・余白・フォント(テーマ共通) */
+    --font-sans: system-ui, -apple-system, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "JetBrains Mono", monospace;
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.5rem;
+
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+}
+
+[data-theme="dark"] {
+    /* background color */
+    --bg-base: var(--nord0);
+    --bg-surface: var(--nord1); /* ヘッダ・side-card・ステータスバーの面背景 */
+    --bg-hover: var(--nord2); /* リストのホバー時や現在地ツリーのハイライト背景 */
+
+    /* text color */
+    --text-main: var(--nord6); /* 見出しや本文のメイン文字 */
+    --text-muted: var(--nord4); /* 記事の日付・概要・サブテキスト */
+    --text-subtle: var(--nord3); /* 検索欄のプレースホルダーや控えめな注釈 */
+
+    /* border */
+    --border-subtle: var(--nord2); /* side-card の外枠や、線区切りリストの横線 */
+    --border-focus: var(--nord8); /* 検索バー入力中やアクティブ要素の枠線 */
+
+    /* accent / status color */
+
+    --accent-primary: var(--nord8); /* リンク・現在地・メイン強調色(Nord Frost系) */
+    --accent-secondary: var(--nord9); /* 言語ラベルやタグバッジのサブ強調色 */
+}
