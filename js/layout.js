@@ -59,7 +59,7 @@ class PortfolioLayout extends HTMLElement {
                 <main class="main-panel" @scroll="handleScroll($event)">
                     ${content}
                     <hr>
-                    <p class="copyright">© 2026- norder</p>
+                    <p class="copyright">© 2026 norder</p>
                 </main>
 
                 <!-- 右サイドパネル -->
