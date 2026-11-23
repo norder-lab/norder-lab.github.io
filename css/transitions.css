@@ -3,3 +3,254 @@
    画面遷移や状態変化に伴うアニメーション・トランジション演出を担当。
    対象: @view-transition / テーマ切替時の広がり演出 / スクロール連動のヘッダ開閉等。
    ========================================================================== */
+
+:root {
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 0.1s;
+    --duration-base: 0.3s;
+    --duration-page: 0.5s;
+}
+
+/* --------------------------------------------------------------------------
+   ページ間遷移（入場・退場アニメーション）
+   共通外枠を固定したまま、中央の main-panel だけを滑らかに切り替える。
+   -------------------------------------------------------------------------- */
+.main-panel {
+    opacity: 1;
+    transform: translateY(0);
+    animation: panel-enter var(--duration-page) var(--ease-out) backwards;
+    transition:
+        opacity 240ms var(--ease-out),
+        transform 240ms var(--ease-out);
+}
+
+.main-panel.is-leaving {
+    animation: none;
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+@keyframes panel-enter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   ヘッダ（スクロール連動開閉・タイトルホバー）
+   -------------------------------------------------------------------------- */
+header {
+    transition:
+        height var(--duration-base) var(--ease-out),
+        opacity var(--duration-base) var(--ease-out);
+}
+
+header.is-hidden {
+    height: 0;
+    opacity: 0;
+    border-bottom-width: 0;
+}
+
+.site-title,
+.site-title svg {
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.site-title:hover,
+.site-title:hover svg {
+    color: var(--accent-primary);
+}
+
+/* --------------------------------------------------------------------------
+   サイドバー（リンク・ディレクトリツリー・パレット）
+   -------------------------------------------------------------------------- */
+.links-card a,
+.dir-tree-card a {
+    transition:
+        background-color var(--duration-fast) var(--ease-out),
+        color var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.links-card .external-icon,
+.dir-tree-card a svg {
+    transition:
+        color var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.links-card a:hover .external-icon {
+    transform: translate(2px, -2px);
+}
+
+.dir-tree-card a:hover {
+    transform: translateX(2px);
+}
+
+.palette-grid .palette-swatch {
+    transition:
+        border-color var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.palette-grid .palette-swatch:hover {
+    transform: translateY(-2px) scale(1.06);
+    box-shadow: 0 3px 8px color-mix(in srgb, var(--nord0) 16%, transparent);
+}
+
+.palette-grid .palette-swatch:active {
+    transform: scale(0.94);
+}
+
+.palette-feedback {
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* --------------------------------------------------------------------------
+   Home / Profile カード・リンクのホバー演出（色変化＋軽い浮き上がり）
+   -------------------------------------------------------------------------- */
+.page-link-card,
+.recent-link-card {
+    transition:
+        background-color var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-base) var(--ease-out),
+        transform var(--duration-base) var(--ease-out);
+}
+
+.page-link-card:hover,
+.recent-link-card:hover {
+    transform: translateY(-1px);
+}
+
+.page-link-card:active,
+.recent-link-card:active {
+    transform: translateY(0);
+}
+
+.page-link-card .page-link-head .link-arrow {
+    transition:
+        transform var(--duration-base) var(--ease-out),
+        color var(--duration-base) var(--ease-out);
+}
+
+.page-link-card:hover .page-link-head .link-arrow {
+    transform: translateX(4px);
+}
+
+.external-links a {
+    transition:
+        background-color var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.external-links a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px color-mix(in srgb, var(--nord0) 8%, transparent);
+}
+
+.external-links .external-icon {
+    transition:
+        color var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.external-links a:hover .external-icon {
+    transform: translate(2px, -2px);
+}
+
+.tag {
+    transition:
+        background-color var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out);
+}
+
+.tag:hover {
+    border-color: var(--border-focus);
+}
+
+/* --------------------------------------------------------------------------
+   Products / Articles（検索バー・線区切りリスト・ページネーション）
+   -------------------------------------------------------------------------- */
+.search-bar {
+    transition:
+        border-color var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.search-bar:focus-within {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--border-focus) 22%, transparent);
+}
+
+.search-icon {
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.search-bar:focus-within .search-icon {
+    color: var(--accent-primary);
+}
+
+.item-list .list-item-link {
+    transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.item-list .list-item-title {
+    transition:
+        color var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.item-list .list-item-link:hover .list-item-title {
+    transform: translateX(3px);
+}
+
+.item-list .list-item-lang {
+    transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.item-list .list-item-link:hover .list-item-lang {
+    border-color: var(--border-focus);
+}
+
+.pagination-btn {
+    transition:
+        background-color var(--duration-fast) var(--ease-out),
+        border-color var(--duration-fast) var(--ease-out),
+        color var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out),
+        opacity var(--duration-fast) var(--ease-out);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.pagination-btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   モーション軽減設定（アクセシビリティ対応）
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+        animation: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

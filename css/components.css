@@ -214,11 +214,6 @@
     border-radius: var(--radius-sm);
     border: 2px solid var(--border-subtle);
     cursor: pointer;
-    transition: border-color 0.15s ease, transform 0.1s ease;
-}
-
-.palette-swatch:hover {
-    border-color: var(--border-focus);
 }
 
 .palette-swatch:active {

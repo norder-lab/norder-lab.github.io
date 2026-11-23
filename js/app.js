@@ -143,3 +143,197 @@ document.addEventListener('alpine:init', () => {
     }));
 });
 
+/**
+ * サイト内ページ遷移（軽量 PJAX）
+ * 外枠（ヘッダ・左右サイドバー・パレット・ステータスバー）を保持したまま
+ * main-panel の中身だけを差し替える。file:// 直開き時や取得失敗時は通常遷移へフォールバック。
+ */
+(() => {
+    const LEAVE_DURATION_MS = 240;
+    let navigationId = 0;
+
+    function wait(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    function updateActiveNav(pathname) {
+        const current = pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.dir-tree-card a').forEach((a) => {
+            if (a.getAttribute('href')?.endsWith(current)) {
+                a.setAttribute('aria-current', 'page');
+            } else {
+                a.removeAttribute('aria-current');
+            }
+        });
+    }
+
+    function swapMainPanel(mainPanel, nextHtml) {
+        const existingCopyright = mainPanel.querySelector('.copyright');
+        const copyrightText = existingCopyright?.textContent || '© 2026 norder';
+
+        const applyDom = () => {
+            if (window.Alpine?.destroyTree) {
+                Array.from(mainPanel.children).forEach((child) => {
+                    window.Alpine.destroyTree(child);
+                });
+            }
+
+            mainPanel.innerHTML = `${nextHtml}<hr>`;
+            const copyright = document.createElement('p');
+            copyright.className = 'copyright';
+            copyright.textContent = copyrightText;
+            mainPanel.appendChild(copyright);
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        };
+
+        if (window.Alpine?.mutateDom) {
+            window.Alpine.mutateDom(applyDom);
+            Array.from(mainPanel.children).forEach((child) => {
+                window.Alpine.initTree?.(child);
+            });
+        } else {
+            applyDom();
+        }
+    }
+
+    async function fetchPageContent(url) {
+        const response = await fetch(url, {
+            headers: { 'X-Requested-With': 'pjax' },
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+        const html = await response.text();
+        const nextDoc = new DOMParser().parseFromString(html, 'text/html');
+        const nextLayout = nextDoc.querySelector('portfolio-layout');
+        if (!nextLayout) {
+            throw new Error('portfolio-layout not found');
+        }
+        return {
+            title: nextDoc.title,
+            html: nextLayout.innerHTML,
+        };
+    }
+
+    async function navigateTo(destination, { pushHistory = true } = {}) {
+        const mainPanel = document.querySelector('.main-panel');
+        if (!mainPanel) {
+            window.location.href = destination.href;
+            return;
+        }
+
+        const currentNavId = ++navigationId;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const leaveDelay = reducedMotion ? 0 : LEAVE_DURATION_MS;
+
+        // file:// 環境では fetch が CORS 制限されるため通常遷移にフォールバック
+        if (location.protocol === 'file:') {
+            if (leaveDelay > 0) {
+                mainPanel.classList.add('is-leaving');
+                await wait(leaveDelay);
+            }
+            window.location.href = destination.href;
+            return;
+        }
+
+        if (leaveDelay > 0) {
+            mainPanel.classList.add('is-leaving');
+        }
+
+        try {
+            const [page] = await Promise.all([
+                fetchPageContent(destination.href),
+                leaveDelay > 0 ? wait(leaveDelay) : Promise.resolve(),
+            ]);
+
+            if (currentNavId !== navigationId) return;
+
+            if (pushHistory) {
+                history.pushState({ url: destination.href }, '', destination.href);
+            }
+            if (page.title) {
+                document.title = page.title;
+            }
+
+            swapMainPanel(mainPanel, page.html);
+            updateActiveNav(destination.pathname);
+
+            if (destination.hash) {
+                const target = document.getElementById(destination.hash.slice(1));
+                if (target) {
+                    target.scrollIntoView();
+                } else {
+                    mainPanel.scrollTop = 0;
+                }
+            } else {
+                mainPanel.scrollTop = 0;
+            }
+
+            // is-leaving を外して panel-enter アニメーションを再生
+            void mainPanel.offsetWidth;
+            mainPanel.classList.remove('is-leaving');
+        } catch {
+            if (currentNavId !== navigationId) return;
+            window.location.href = destination.href;
+        }
+    }
+
+    window.addEventListener('pageshow', () => {
+        document.querySelector('.main-panel')?.classList.remove('is-leaving');
+    });
+
+    window.addEventListener('popstate', () => {
+        navigateTo(new URL(location.href), { pushHistory: false });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+        ) {
+            return;
+        }
+
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+
+        const rawHref = link.getAttribute('href');
+        if (
+            !rawHref ||
+            rawHref.startsWith('#') ||
+            rawHref.startsWith('mailto:') ||
+            rawHref.startsWith('tel:') ||
+            rawHref.startsWith('javascript:') ||
+            link.hasAttribute('download') ||
+            (link.target && link.target !== '_self')
+        ) {
+            return;
+        }
+
+        let destination;
+        try {
+            destination = new URL(rawHref, location.href);
+        } catch {
+            return;
+        }
+
+        const isSameSite =
+            destination.protocol === location.protocol &&
+            destination.origin === location.origin;
+
+        if (!isSameSite || destination.href === location.href) {
+            return;
+        }
+
+        event.preventDefault();
+        navigateTo(destination, { pushHistory: true });
+    });
+})();
+
