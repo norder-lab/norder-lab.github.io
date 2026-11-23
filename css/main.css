@@ -339,6 +339,155 @@ section > h2 svg {
 }
 
 /* --------------------------------------------------------------------------
+   Products / Articles 共通（検索バー・線区切りリスト・ページネーション）
+   -------------------------------------------------------------------------- */
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    margin: var(--space-md) 0 var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+}
+
+.search-bar:focus-within {
+    border-color: var(--border-focus);
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--text-subtle);
+}
+
+.search-input {
+    width: 100%;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-main);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--text-subtle);
+}
+
+.item-list {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.list-item {
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.list-item-link {
+    display: block;
+    padding: var(--space-md) var(--space-sm);
+    transition: background-color 0.15s ease;
+}
+
+.list-item-link:hover {
+    background-color: var(--bg-hover);
+}
+
+.list-item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.list-item-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-main);
+    transition: color 0.15s ease;
+}
+
+.list-item-link:hover .list-item-title {
+    color: var(--accent-primary);
+}
+
+.list-item-lang {
+    padding: 2px var(--space-sm);
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent-secondary);
+    flex-shrink: 0;
+}
+
+.list-item-desc {
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.list-item-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-subtle);
+    flex-shrink: 0;
+}
+
+.list-item-tags {
+    margin-top: var(--space-xs);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.pagination-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.pagination-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: var(--bg-hover);
+    border-color: var(--border-focus);
+    color: var(--accent-primary);
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
    レスポンシブ調整
    -------------------------------------------------------------------------- */
 @media (max-width: 600px) {
