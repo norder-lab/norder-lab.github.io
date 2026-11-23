@@ -41,7 +41,7 @@
                             <h2>directory tree</h2>
                             <ul>
                                 <li><a href="./index.html">&frasl;home ~</a></li>
-                                <li><a href="./prfile.html">profile</a></li>
+                                <li><a href="./profile.html">profile</a></li>
                                 <li><a href="./products.html">products</a></li>
                                 <li><a href="./articles.html">articles</a></li>
                             </ul>
