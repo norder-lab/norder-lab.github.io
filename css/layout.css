@@ -28,6 +28,7 @@ header {
     overflow: hidden;
 
     background-color: transparent;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 /* 中央3ペイン構成 */
