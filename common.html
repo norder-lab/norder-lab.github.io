@@ -24,74 +24,9 @@
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     </head>
     <body>
-        <header>
-            <p class="site-title">norder's portfolio</p>
-            <button type="button" class="theme-btn" id="theme-toggle">dark</button>
-        </header>
-
-        <div class="central-panel">
-
-            <!-- 左サイドパネル -->
-            <aside class="side-panel">
-
-                <!-- 名前カード -->
-                <div class="side-card name-card">
-                    <img src="" alt="norder's icon"/>
-                    <p>norder</p>
-                </div>
-
-                <!-- Qiita / GitHub カード -->
-                <div class="side-card links-card">
-                    <h2>links</h2>
-                    <div> </div>
-                    <div> </div>
-                </div>
-
-                <!-- ディレクトリツリーカード -->
-                <nav class="side-card dir-tree-card">
-                    <h2>directory tree</h2>
-                    <ul>
-                        <li><a>&frasl;home ~</a></li>
-                        <li><a>profile</a></li>
-                        <li><a>products</a></li>
-                        <li><a>articles</a></li>
-                    </ul>
-                </nav>
-
-            </aside>
-
-            <main class="main-panel">
-                <!-- NOTE: ここにprofileなどをWeb Componentとして挿入されるイメージ(実際は逆) -->
-                <hr>
-                <p>© 2026- norder</p>
-            </main>
-
-            <!-- 右サイドパネル -->
-            <aside class="side-panel">
-
-                <!-- キーバインドカード -->
-                <div class="side-card keybinds-card">
-                    <h2>keybind</h2>
-                    <div class="keybind"></div>
-                    <div class="keybind"></div>
-                    <div class="keybind"></div>
-                </div>
-
-                <!-- パレットカード -->
-                <div class="side-card palette-card">
-                    <h2>nord palette</h2>
-                    <div class="palette-grid">
-                    </div>
-                </div>
-
-            </aside>
-
-        </div>
-
-        <!-- ステータスバー(下に常時表示) -->
-        <div class="status-bar">
-        </div>
-
-
+        <portfolio-layout>
+            <h1>HOME</h1>
+        </portfolio-layout>
     </body>
+
 </html>
