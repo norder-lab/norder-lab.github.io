@@ -3,3 +3,69 @@
    ブラウザ標準のデフォルトスタイルや表示差異の初期化を担当。
    ※配色（色指定）やレイアウト、個別パーツの装飾はここに書かない。
    ========================================================================== */
+
+/* サイズ計算の統一 */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 余白のリセット */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+/* 見出しの均一化 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* リストとリンクの素体化 */
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* フォーム部品の初期化 */
+button,
+input {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+/* メディアの隙間消し */
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+body {
+    line-height: 1.7;
+    letter-spacing: 0.05rem;
+}
